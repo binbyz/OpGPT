@@ -72,6 +72,8 @@ export default function ChatScreen() {
         <Ionicons name="image-outline" size={24} color="black" />
         <TextInput
           style={styles.input}
+          multiline={true}
+          numberOfLines={4}
           placeholder={'Message'}
           onChangeText={(text) => setInputMessage(text)}
         />
