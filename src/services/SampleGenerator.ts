@@ -23,4 +23,10 @@ export const sampleThreads: Thread[] = [
   createOpGptMessage('별말씀을요!'),
   createUserMessage('안녕히 계세요!'),
   createOpGptMessage('안녕히 가세요!'),
+  createUserMessage('React Expo를 시작하려면 어떻게 해야 돼?'),
+  createOpGptMessage('React Expo를 시작하려면 다음 명령어를 입력하세요: expo init my-new-project'),
+  createUserMessage('감사합니다!'),
+  createOpGptMessage('별말씀을요!'),
+  createUserMessage('나의 옵을 500개로 만들어줘!'),
+  createOpGptMessage('불가능합니다. 옵은 500개 이상으로 만들 수 없습니다.'),
 ];

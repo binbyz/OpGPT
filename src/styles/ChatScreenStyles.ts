@@ -18,9 +18,10 @@ export const styles = StyleSheet.create({
   },
   threadList: {
     flex: 1,
+    flexDirection: 'column',
   },
   threadContainer: {
-    paddingVertical: 10,
+    paddingVertical: 15,
     paddingHorizontal: 25,
     gap: 5,
   },
@@ -42,5 +43,19 @@ export const styles = StyleSheet.create({
   threadMessage: {
     fontSize: 16,
     marginLeft: 25 + 10,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 30,
+    marginBottom: 50,
+    alignItems: 'center',
+    gap: 15,
+  },
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#eaeaea',
+    borderRadius: 30,
+    padding: 10,
   },
 });

@@ -1,16 +1,29 @@
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { styles } from '@/styles/ChatScreenStyles';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
+import { Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useEffect, useRef, useState } from 'react';
 import { Thread } from '@/types';
-import { createUserMessage, sampleThreads } from '@/components/sample_threads';
+import { createUserMessage, sampleThreads } from '@/services/SampleGenerator';
 
 export default function ChatScreen() {
+  const threadListRef = useRef<FlatList>(null);
+
   const [inputMessage, setInputMessage] = useState('');
   const [threads, setThreads] = useState<Thread[]>([]);
 
   // sample
-  useEffect(() => setThreads(sampleThreads), []);
+  useEffect(() => {
+    setThreads(sampleThreads);
+  }, []);
 
   const sendMessage = () => {
     if (inputMessage.length) {
@@ -32,9 +45,12 @@ export default function ChatScreen() {
       </View>
 
       <FlatList
+        ref={threadListRef}
         style={styles.threadList}
         data={threads}
         keyExtractor={(_, index) => index.toString()}
+        onContentSizeChange={() => threadListRef.current?.scrollToEnd({ animated: true })}
+        onLayout={() => threadListRef.current?.scrollToEnd({ animated: true })}
         renderItem={({ item }) => {
           return (
             <View style={styles.threadContainer}>
@@ -48,6 +64,21 @@ export default function ChatScreen() {
           );
         }}
       />
+
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.inputContainer}
+      >
+        <Ionicons name="image-outline" size={24} color="black" />
+        <TextInput
+          style={styles.input}
+          placeholder={'Message'}
+          onChangeText={(text) => setInputMessage(text)}
+        />
+        <TouchableOpacity onPress={sendMessage}>
+          <Feather name="send" size={24} color="black" />
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </View>
   );
 }
