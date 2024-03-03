@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -51,7 +54,6 @@ export const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     paddingHorizontal: 30,
-    marginBottom: 50,
     alignItems: 'center',
     gap: 15,
   },

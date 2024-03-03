@@ -1,22 +1,28 @@
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import ChatScreenSidebar from '@/screens/ChatScreenSidebar';
+import ChatScreen from '@/screens/ChatScreen';
 import { StatusBar } from 'expo-status-bar';
-import Constants from 'expo-constants';
 
-import ChatScreen from '@/components/ChatScreen';
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <ChatScreen></ChatScreen>
+    <NavigationContainer>
       <StatusBar style="auto" />
-    </SafeAreaView>
+
+      <Drawer.Navigator
+        initialRouteName="ChatScreen"
+        screenOptions={{
+          headerShown: false,
+          drawerStyle: {
+            width: '80%',
+          },
+        }}
+        drawerContent={({ navigation }) => <ChatScreenSidebar navigation={navigation} />}
+      >
+        <Drawer.Screen name="ChatScreen" component={ChatScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    marginTop: Constants.statusBarHeight,
-  },
-});
