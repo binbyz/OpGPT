@@ -44,6 +44,10 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 25 + 10,
   },
+  threadThinkingGif: {
+    width: 25,
+    height: 25,
+  },
   inputContainer: {
     flexDirection: 'row',
     paddingHorizontal: 30,

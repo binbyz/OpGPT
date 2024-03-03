@@ -12,10 +12,11 @@ import { styles } from '@/styles/ChatScreenStyles';
 import { Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
 import { Thread } from '@/types';
-import { createUserMessage, sampleThreads } from '@/services/SampleGenerator';
+import { createOpGptMessage, createUserMessage, sampleThreads } from '@/services/SampleGenerator';
 
 export default function ChatScreen() {
   const threadListRef = useRef<FlatList>(null);
+  const inputMessageRef = useRef<TextInput>(null);
 
   const [inputMessage, setInputMessage] = useState('');
   const [threads, setThreads] = useState<Thread[]>([]);
@@ -27,8 +28,14 @@ export default function ChatScreen() {
 
   const sendMessage = () => {
     if (inputMessage.length) {
-      setThreads([...threads, createUserMessage(inputMessage)]);
+      setThreads([
+        ...threads,
+        createUserMessage(inputMessage),
+        createOpGptMessage(''), // for loading image
+      ]);
+
       setInputMessage('');
+      inputMessageRef.current?.clear();
     }
   };
 
@@ -59,7 +66,16 @@ export default function ChatScreen() {
                 <Text style={styles.threadUser}>{item.name}</Text>
               </View>
 
-              <Text style={styles.threadMessage}>{item.message}</Text>
+              <View style={styles.threadMessage}>
+                {item.message.length ? (
+                  <Text>{item.message}</Text>
+                ) : (
+                  <Image
+                    source={require('@/../assets/icons/dual_ball_50x50.gif')}
+                    style={styles.threadThinkingGif}
+                  />
+                )}
+              </View>
             </View>
           );
         }}
@@ -71,6 +87,7 @@ export default function ChatScreen() {
       >
         <Ionicons name="image-outline" size={24} color="black" />
         <TextInput
+          ref={inputMessageRef}
           style={styles.input}
           multiline={true}
           numberOfLines={4}
