@@ -54,6 +54,7 @@ export const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     paddingHorizontal: 30,
+    paddingTop: 10,
     alignItems: 'center',
     gap: 15,
   },

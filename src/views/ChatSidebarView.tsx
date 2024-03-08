@@ -1,14 +1,14 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles } from '@/styles/ChatScreenSidebarStyles';
+import { styles } from '@/styles/ChatSidebarStyle';
 import { MaterialIcons } from '@expo/vector-icons';
 
 type ChatScreenSidebarProps = {
   navigation: DrawerNavigationHelpers;
 };
 
-export default function ChatScreenSidebar({ navigation }: ChatScreenSidebarProps) {
+export default function ChatSidebarView({ navigation }: ChatScreenSidebarProps) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}></View>

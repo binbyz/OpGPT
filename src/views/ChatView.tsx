@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { styles } from '@/styles/ChatScreenStyles';
+import { styles } from '@/styles/ChatStyle';
 import { Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
 import { Thread } from '@/types';
@@ -20,7 +20,7 @@ type ChatScreenProps = {
   navigation: DrawerNavigationHelpers;
 };
 
-export default function ChatScreen({ navigation }: ChatScreenProps) {
+export default function ChatView({ navigation }: ChatScreenProps) {
   const threadListRef = useRef<FlatList>(null);
   const inputMessageRef = useRef<TextInput>(null);
 
